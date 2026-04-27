@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>HRX Support Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">HRX</div>
+    <div class="title">
+        <h1>Support Tracker</h1>
+        <p>Wer supportet wen – übersichtlich, fair, transparent.</p>
+    </div>
+</header>
+
+<nav>
+    <button class="tab-button active" data-tab="tracker">Tracker</button>
+    <button class="tab-button" data-tab="ranking">Ranking</button>
+    <button class="tab-button" data-tab="export">Export</button>
+</nav>
+
+<main>
+    <section id="tracker" class="tab active">
+        <div id="config">
+            <h2>Streamer hinzufügen</h2>
+            <input id="newStreamer" placeholder="Name eingeben">
+            <button onclick="addStreamer()">Hinzufügen</button>
+        </div>
+
+        <h2>Support Matrix</h2>
+        <div class="table-wrapper">
+            <table id="supportTable"></table>
+        </div>
+
+        <div id="actions">
+            <button class="danger" onclick="resetMonth()">Monat zurücksetzen</button>
+        </div>
+    </section>
+
+    <section id="ranking" class="tab">
+        <h2>Monats‑Ranking</h2>
+        <p>Wer hat am meisten andere unterstützt?</p>
+        <div id="rankingList"></div>
+
+        <h3>Diagramm</h3>
+        <div id="chart"></div>
+    </section>
+
+    <section id="export" class="tab">
+        <h2>Export & Backup</h2>
+        <button onclick="exportCSV()">CSV Export</button>
+        <button onclick="downloadBackup()">Backup herunterladen</button>
+
+        <h3>Backup importieren</h3>
+        <input type="file" id="backupFile" accept=".json" onchange="importBackup(event)">
+        <p class="hint">Achtung: Import überschreibt die aktuellen Daten.</p>
+    </section>
+</main>
+
+<footer>
+    <small>HRX Creator Network – internal tool</small>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
