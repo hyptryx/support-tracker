@@ -34,6 +34,20 @@
 </header>
 
 <button onclick="saveData()" class="save-btn">Speichern</button>
+
+<div class="tabs">
+    <button class="tab-button active" data-tab="tableTab">Tabelle</button>
+    <button class="tab-button" data-tab="rankingTab">Ranking</button>
+</div>
+
+<div id="tableTab" class="tab active">
+    <table id="supportTable"></table>
+</div>
+
+<div id="rankingTab" class="tab">
+    <div id="rankingList"></div>
+    <div id="chart"></div>
+</div>
     
 <nav>
     <button class="tab-button active" data-tab="tracker">Tracker</button>
