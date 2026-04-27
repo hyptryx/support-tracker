@@ -7,7 +7,8 @@ let streamers = [
     "RaphXlive",
     "Ramona",
     "Nudlaug",
-    "Linkderstinkt"
+    "Linkderstinkt",
+    "HyptryX"
 ];
 let support = {};
 
