@@ -20,9 +20,8 @@
             background: #ff9900;
         }
     </style>
-    
 </head>
- 
+
 <body>
 
 <header>
@@ -33,22 +32,10 @@
     </div>
 </header>
 
-<button onclick="saveData()" class="save-btn">Speichern</button>
+<!-- SPEICHERN -->
+<button onclick="saveToGitHub()" class="save-btn">Speichern</button>
 
-<div class="tabs">
-    <button class="tab-button active" data-tab="tableTab">Tabelle</button>
-    <button class="tab-button" data-tab="rankingTab">Ranking</button>
-</div>
-
-<div id="tableTab" class="tab active">
-    <table id="supportTable"></table>
-</div>
-
-<div id="rankingTab" class="tab">
-    <div id="rankingList"></div>
-    <div id="chart"></div>
-</div>
-    
+<!-- NAVIGATION -->
 <nav>
     <button class="tab-button active" data-tab="tracker">Tracker</button>
     <button class="tab-button" data-tab="ranking">Ranking</button>
@@ -56,6 +43,8 @@
 </nav>
 
 <main>
+
+    <!-- TRACKER TAB -->
     <section id="tracker" class="tab active">
         <div id="config">
             <h2>Streamer hinzufügen</h2>
@@ -67,21 +56,20 @@
         <div class="table-wrapper">
             <table id="supportTable"></table>
         </div>
-
-        <div id="actions">
-            <button class="danger" onclick="resetMonth()">Monat zurücksetzen</button>
-        </div>
     </section>
 
+    <!-- RANKING TAB -->
     <section id="ranking" class="tab">
         <h2>Monats‑Ranking</h2>
         <p>Wer hat am meisten andere unterstützt?</p>
+
         <div id="rankingList"></div>
 
         <h3>Diagramm</h3>
         <div id="chart"></div>
     </section>
 
+    <!-- EXPORT TAB -->
     <section id="export" class="tab">
         <h2>Export & Backup</h2>
         <button onclick="exportCSV()">CSV Export</button>
@@ -91,6 +79,7 @@
         <input type="file" id="backupFile" accept=".json" onchange="importBackup(event)">
         <p class="hint">Achtung: Import überschreibt die aktuellen Daten.</p>
     </section>
+
 </main>
 
 <footer>
@@ -98,5 +87,6 @@
 </footer>
 
 <script src="script.js"></script>
+
 </body>
 </html>
