@@ -1,7 +1,7 @@
 // ===============================
 // GITHUB KONFIGURATION
 // ===============================
-const GITHUB_USER = "hyptyrx";                 // <-- Dein GitHub Benutzername
+const GITHUB_USER = "hyptryx";                 // <-- Dein GitHub Benutzername
 const GITHUB_REPO = "support-tracker";         // <-- Dein Repository
 const GITHUB_FILE = "data.json";               // <-- Datei mit den Daten
 const GITHUB_TOKEN = "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"; // <-- Dein Token
