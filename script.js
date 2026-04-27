@@ -1,21 +1,76 @@
-let streamers = [
-    "RoninMartoku",
-    "Letz_Zock",
-    "Kernölmediziner",
-    "Nikki-Lilith",
-    "Nana",
-    "RaphXlive",
-    "Ramona",
-    "Nudlaug",
-    "Linkderstinkt",
-    "HyptryX"
-];
-let support = {};
+// ===============================
+// GITHUB KONFIGURATION
+// ===============================
+const GITHUB_USER = "hyptyrx";                 // <-- Dein GitHub Benutzername
+const GITHUB_REPO = "support-tracker";         // <-- Dein Repository
+const GITHUB_FILE = "data.json";               // <-- Datei mit den Daten
+const GITHUB_TOKEN = "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"; // <-- Dein Token
 
-function save() {
-    localStorage.setItem("streamers", JSON.stringify(streamers));
-    localStorage.setItem("support", JSON.stringify(support));
+// ===============================
+// Globale Variablen
+// ===============================
+let streamers = [];
+let support = {};
+let githubSha = ""; // notwendig für Updates
+
+// ===============================
+// GitHub Datei laden
+// ===============================
+async function loadFromGitHub() {
+    const url = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
+
+    const response = await fetch(url, {
+        headers: { "Authorization": `Bearer ${GITHUB_TOKEN}` }
+    });
+
+    const data = await response.json();
+
+    githubSha = data.sha;
+
+    const content = JSON.parse(atob(data.content));
+
+    streamers = content.streamers || [];
+    support = content.support || {};
+
+    ensureStructure();
+    renderAll();
 }
+
+// ===============================
+// GitHub Datei speichern
+// ===============================
+async function saveToGitHub() {
+    ensureStructure();
+
+    const newContent = {
+        streamers,
+        support
+    };
+
+    const url = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
+
+    const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+            "Authorization": `Bearer ${GITHUB_TOKEN}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            message: "HRX Support Tracker Update",
+            content: btoa(JSON.stringify(newContent, null, 2)),
+            sha: githubSha
+        })
+    });
+
+    const result = await response.json();
+    githubSha = result.content.sha;
+
+    alert("Gespeichert! Alle HRX‑Leute sehen jetzt deinen Stand.");
+}
+
+// ===============================
+// Restlicher Code bleibt gleich
+// ===============================
 
 function ensureStructure() {
     streamers.forEach(from => {
@@ -35,13 +90,15 @@ function addStreamer() {
 
     streamers.push(name);
     ensureStructure();
-    save();
-    input.value = "";
+    renderAll();
+}
+
+function increment(from, to) {
+    support[from][to]++;
     renderAll();
 }
 
 function renderTable() {
-    ensureStructure();
     const table = document.getElementById("supportTable");
     table.innerHTML = "";
 
@@ -74,25 +131,6 @@ function renderTable() {
     });
 }
 
-function increment(from, to) {
-    support[from][to] = (support[from][to] || 0) + 1;
-    save();
-    renderAll();
-}
-
-function resetMonth() {
-    if (!confirm("Monat wirklich komplett zurücksetzen?")) return;
-
-    streamers.forEach(f => {
-        streamers.forEach(t => {
-            if (f !== t) support[f][t] = 0;
-        });
-    });
-
-    save();
-    renderAll();
-}
-
 function getTotals() {
     const totals = {};
     streamers.forEach(s => totals[s] = 0);
@@ -111,11 +149,6 @@ function renderRanking() {
     const chart = document.getElementById("chart");
     container.innerHTML = "";
     chart.innerHTML = "";
-
-    if (streamers.length === 0) {
-        container.innerHTML = "<p>Noch keine Daten.</p>";
-        return;
-    }
 
     const totals = getTotals();
     const sorted = Object.entries(totals).sort((a, b) => b[1] - a[1]);
@@ -158,59 +191,9 @@ function renderRanking() {
     });
 }
 
-function exportCSV() {
-    let csv = "Von,Zu,Anzahl\n";
-
-    streamers.forEach(f => {
-        streamers.forEach(t => {
-            if (f !== t) {
-                csv += `${f},${t},${support[f][t] || 0}\n`;
-            }
-        });
-    });
-
-    const blob = new Blob([csv], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "hrx_support.csv";
-    a.click();
-}
-
-function downloadBackup() {
-    const data = { streamers, support };
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "hrx_support_backup.json";
-    a.click();
-}
-
-function importBackup(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = e => {
-        try {
-            const data = JSON.parse(e.target.result);
-            if (!Array.isArray(data.streamers) || typeof data.support !== "object") {
-                alert("Ungültiges Backup.");
-                return;
-            }
-            streamers = data.streamers;
-            support = data.support;
-            save();
-            renderAll();
-            alert("Backup importiert.");
-        } catch {
-            alert("Fehler beim Lesen des Backups.");
-        }
-    };
-    reader.readAsText(file);
+function renderAll() {
+    renderTable();
+    renderRanking();
 }
 
 function setupTabs() {
@@ -228,11 +211,5 @@ function setupTabs() {
     });
 }
 
-function renderAll() {
-    ensureStructure();
-    renderTable();
-    renderRanking();
-}
-
 setupTabs();
-renderAll();
+loadFromGitHub();
