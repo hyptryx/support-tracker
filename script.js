@@ -1,76 +1,32 @@
-// ===============================
-// GITHUB KONFIGURATION
-// ===============================
-const GITHUB_USER = "hyptryx";                 // <-- Dein GitHub Benutzername
-const GITHUB_REPO = "support-tracker";         // <-- Dein Repository
-const GITHUB_FILE = "data.json";               // <-- Datei mit den Daten
-const GITHUB_TOKEN = "";
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const docRef = db.collection("tracker").doc("data");
 
-// ===============================
-// Globale Variablen
-// ===============================
 let streamers = [];
 let support = {};
-let githubSha = ""; // notwendig für Updates
 
-// ===============================
-// GitHub Datei laden
-// ===============================
 async function loadFromGitHub() {
-    const url = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
+    const snap = await docRef.get();
 
-    const response = await fetch(url, {
-        headers: { "Authorization": `Bearer ${GITHUB_TOKEN}` }
-    });
-
-    const data = await response.json();
-
-    githubSha = data.sha;
-
-    const content = JSON.parse(atob(data.content));
-
-    streamers = content.streamers || [];
-    support = content.support || {};
+    if (!snap.exists) {
+        streamers = [];
+        support = {};
+        await docRef.set({ streamers, support });
+    } else {
+        const data = snap.data();
+        streamers = data.streamers || [];
+        support = data.support || {};
+    }
 
     ensureStructure();
     renderAll();
 }
 
-// ===============================
-// GitHub Datei speichern
-// ===============================
 async function saveToGitHub() {
     ensureStructure();
-
-    const newContent = {
-        streamers,
-        support
-    };
-
-    const url = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
-
-    const response = await fetch(url, {
-        method: "PUT",
-        headers: {
-            "Authorization": `Bearer ${GITHUB_TOKEN}`,
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            message: "HRX Support Tracker Update",
-            content: btoa(JSON.stringify(newContent, null, 2)),
-            sha: githubSha
-        })
-    });
-
-    const result = await response.json();
-    githubSha = result.content.sha;
-
+    await docRef.set({ streamers, support }, { merge: true });
     alert("Gespeichert! Alle HRX‑Leute sehen jetzt deinen Stand.");
 }
-
-// ===============================
-// Restlicher Code bleibt gleich
-// ===============================
 
 function ensureStructure() {
     streamers.forEach(from => {
@@ -91,6 +47,7 @@ function addStreamer() {
     streamers.push(name);
     ensureStructure();
     renderAll();
+    input.value = "";
 }
 
 function increment(from, to) {
