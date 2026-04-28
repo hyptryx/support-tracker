@@ -58,3 +58,36 @@
   font-size: 14px;
   opacity: 0.85;
 }
+
+/* HRX Ranking Upgrade */
+
+.ranking-item {
+    background: #111;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 12px rgba(255, 120, 0, 0.15);
+    transition: 0.25s ease;
+}
+
+.ranking-item:hover {
+    transform: translateX(4px);
+    box-shadow: 0 0 18px rgba(255, 120, 0, 0.35);
+}
+
+.ranking-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ff7a00;
+    text-shadow: 0 0 6px rgba(255, 120, 0, 0.4);
+}
+
+.ranking-score {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    opacity: 0.9;
+}
