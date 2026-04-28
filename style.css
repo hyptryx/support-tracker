@@ -1,168 +1,59 @@
-:root {
-    --bg: #050509;
-    --bg-alt: #101018;
-    --accent: #ff4d00;
-    --accent-soft: #ff6a2a;
-    --text: #f5f5f5;
-    --muted: #888;
-}
-
-* {
-    box-sizing: border-box;
-}
-
 body {
     margin: 0;
-    background: radial-gradient(circle at top, #1a1a2e 0, #050509 55%);
-    color: var(--text);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: #eee;
 }
 
 header {
     display: flex;
     align-items: center;
-    padding: 16px 20px;
-    border-bottom: 1px solid #222;
-    background: linear-gradient(90deg, #050509, #120909);
+    padding: 20px;
+    background: #222;
+    border-bottom: 2px solid #ff8800;
 }
 
 .logo {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: radial-gradient(circle, var(--accent) 0, #330000 60%, #000 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-    letter-spacing: 2px;
-    color: #fff;
-    margin-right: 12px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #ff8800;
+    margin-right: 20px;
 }
 
 .title h1 {
     margin: 0;
-    font-size: 22px;
+    font-size: 28px;
 }
 
 .title p {
-    margin: 2px 0 0;
-    color: var(--muted);
-    font-size: 13px;
+    margin: 0;
+    opacity: 0.7;
 }
 
 nav {
     display: flex;
-    gap: 8px;
-    padding: 10px 20px;
-    border-bottom: 1px solid #222;
-    background: #050509cc;
-    backdrop-filter: blur(10px);
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    background: #1a1a1a;
+    border-bottom: 2px solid #333;
 }
 
 .tab-button {
-    background: #14141f;
-    border: 1px solid #222;
-    color: var(--text);
-    padding: 8px 14px;
-    border-radius: 999px;
+    flex: 1;
+    padding: 15px;
+    background: #1a1a1a;
+    color: #ccc;
+    border: none;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 16px;
 }
 
 .tab-button.active {
-    border-color: var(--accent);
-    box-shadow: 0 0 12px #ff4d0033;
-    background: #1b1010;
+    background: #ff8800;
+    color: #000;
+    font-weight: bold;
 }
 
 main {
     padding: 20px;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-h2 {
-    margin-top: 0;
-}
-
-#config {
-    margin-bottom: 16px;
-    background: #101018;
-    padding: 12px 14px;
-    border-radius: 10px;
-    border: 1px solid #222;
-}
-
-input {
-    padding: 8px 10px;
-    border-radius: 6px;
-    border: 1px solid #333;
-    background: #050509;
-    color: var(--text);
-}
-
-input:focus {
-    outline: none;
-    border-color: var(--accent);
-}
-
-button {
-    background: var(--accent);
-    border: none;
-    padding: 8px 16px;
-    margin-left: 6px;
-    cursor: pointer;
-    color: white;
-    font-weight: 600;
-    border-radius: 999px;
-    font-size: 13px;
-}
-
-button:hover {
-    background: var(--accent-soft);
-}
-
-button.danger {
-    background: #b00020;
-}
-
-button.danger:hover {
-    background: #d00030;
-}
-
-.table-wrapper {
-    overflow-x: auto;
-    border-radius: 10px;
-    border: 1px solid #222;
-    background: #050509aa;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 500px;
-}
-
-table td, table th {
-    border: 1px solid #222;
-    padding: 6px;
-    text-align: center;
-    font-size: 12px;
-}
-
-table th {
-    background: #14141f;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-}
-
-#actions {
-    margin-top: 12px;
 }
 
 .tab {
@@ -173,89 +64,98 @@ table th {
     display: block;
 }
 
-#rankingList {
+#config {
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 8px;
+    border-radius: 4px;
+    border: none;
+    margin-right: 10px;
+}
+
+button {
+    padding: 8px 12px;
+    background: #ff8800;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #000;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #ff9900;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
     margin-top: 10px;
 }
 
+th, td {
+    border: 1px solid #333;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background: #222;
+}
+
+td button {
+    margin-bottom: 5px;
+}
+
+#rankingList {
+    margin-top: 20px;
+}
+
 .ranking-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #101018;
-    border-radius: 8px;
-    padding: 8px 10px;
-    margin-bottom: 6px;
-    border: 1px solid #222;
-}
-
-.ranking-name {
-    font-weight: 600;
-}
-
-.ranking-score {
-    color: var(--accent-soft);
-    font-weight: 600;
-}
-
-#chart {
-    margin-top: 12px;
-    background: #050509aa;
-    border-radius: 10px;
+    background: #222;
     padding: 10px;
-    border: 1px solid #222;
+    margin-bottom: 10px;
+    border-left: 4px solid #ff8800;
 }
 
 .chart-bar {
     display: flex;
     align-items: center;
-    margin-bottom: 6px;
-    font-size: 12px;
+    margin-bottom: 10px;
 }
 
 .chart-label {
-    width: 90px;
+    width: 120px;
 }
 
 .chart-track {
     flex: 1;
-    background: #14141f;
-    border-radius: 999px;
+    background: #333;
+    height: 20px;
+    border-radius: 4px;
+    margin: 0 10px;
     overflow: hidden;
-    margin: 0 8px;
 }
 
 .chart-fill {
-    height: 10px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+    height: 100%;
+    background: #ff8800;
 }
 
 .chart-value {
     width: 40px;
     text-align: right;
-    color: var(--muted);
-}
-
-.hint {
-    font-size: 12px;
-    color: var(--muted);
 }
 
 footer {
-    padding: 10px 20px 20px;
     text-align: center;
-    color: var(--muted);
-    font-size: 11px;
-}
-
-/* Mobile */
-@media (max-width: 700px) {
-    header {
-        padding: 12px 14px;
-    }
-    main {
-        padding: 14px;
-    }
-    .chart-label {
-        width: 70px;
-    }
+    padding: 20px;
+    opacity: 0.5;
+    font-size: 14px;
 }
