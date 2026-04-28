@@ -32,10 +32,8 @@
     </div>
 </header>
 
-<!-- SPEICHERN -->
 <button onclick="saveToGitHub()" class="save-btn">Speichern</button>
 
-<!-- NAVIGATION -->
 <nav>
     <button class="tab-button active" data-tab="tracker">Tracker</button>
     <button class="tab-button" data-tab="ranking">Ranking</button>
@@ -44,7 +42,6 @@
 
 <main>
 
-    <!-- TRACKER TAB -->
     <section id="tracker" class="tab active">
         <div id="config">
             <h2>Streamer hinzufügen</h2>
@@ -58,7 +55,6 @@
         </div>
     </section>
 
-    <!-- RANKING TAB -->
     <section id="ranking" class="tab">
         <h2>Monats‑Ranking</h2>
         <p>Wer hat am meisten andere unterstützt?</p>
@@ -69,7 +65,6 @@
         <div id="chart"></div>
     </section>
 
-    <!-- EXPORT TAB -->
     <section id="export" class="tab">
         <h2>Export & Backup</h2>
         <button onclick="exportCSV()">CSV Export</button>
@@ -86,6 +81,14 @@
     <small>HRX Creator Network – internal tool</small>
 </footer>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+<!-- Deine Firebase Config -->
+<script src="config.js"></script>
+
+<!-- Hauptscript -->
 <script src="script.js"></script>
 
 </body>
