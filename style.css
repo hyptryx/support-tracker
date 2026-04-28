@@ -1,91 +1,58 @@
 /* ===========================
-   HRX GAMIFIED RANKING (Option B)
+   HRX RANKING – Option A
+   Für deine bestehende Struktur
    =========================== */
 
-/* Ranking Container */
-.ranking-container {
-  padding: 20px;
-  background: #1a1a1a;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(255, 120, 0, 0.08);
+#rankingList {
+  margin-top: 20px;
 }
 
-/* Ranking Title */
-.ranking-container h2 {
-  font-size: 26px;
-  margin-bottom: 20px;
-  color: #ff7a00;
-  text-shadow: 0 0 8px rgba(255, 120, 0, 0.4);
-}
-
-/* Ranking List */
-.ranking-entry {
-  display: flex;
-  align-items: center;
-  margin-bottom: 18px;
-  padding: 12px 14px;
+.ranking-item {
   background: #111;
+  padding: 14px 18px;
+  margin-bottom: 14px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(255, 120, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 12px rgba(255, 120, 0, 0.15);
   transition: 0.25s ease;
 }
 
-.ranking-entry:hover {
+.ranking-item:hover {
   transform: translateX(4px);
-  box-shadow: 0 0 16px rgba(255, 120, 0, 0.25);
-}
-
-/* Rank Badge (#1, #2, #3) */
-.rank-badge {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  font-size: 18px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 14px;
-  color: #000;
-  text-shadow: 0 0 4px rgba(0,0,0,0.4);
-}
-
-.rank-1 { background: linear-gradient(135deg, #ffd700, #ffb300); }
-.rank-2 { background: linear-gradient(135deg, #c0c0c0, #a8a8a8); }
-.rank-3 { background: linear-gradient(135deg, #cd7f32, #b06a2c); }
-.rank-default { background: #333; color: #fff; }
-
-/* Name + Supports */
-.ranking-info {
-  flex: 1;
+  box-shadow: 0 0 18px rgba(255, 120, 0, 0.35);
 }
 
 .ranking-name {
-  font-size: 18px;
-  font-weight: 600;
-  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ff7a00;
+  text-shadow: 0 0 6px rgba(255, 120, 0, 0.4);
 }
 
-.ranking-supports {
-  font-size: 14px;
-  color: #ff7a00;
+.ranking-score {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
   opacity: 0.9;
 }
 
-/* Diagram Bars */
-.diagram-bar {
+/* Diagramm */
+#chart {
+  margin-top: 20px;
+}
+
+#chart .bar {
   height: 22px;
-  border-radius: 10px;
   background: linear-gradient(90deg, #ff7a00, #ff3c00);
+  border-radius: 10px;
+  margin-bottom: 10px;
   box-shadow: 0 0 12px rgba(255, 120, 0, 0.4);
   transition: width 0.6s ease;
 }
 
-.diagram-row {
-  margin-bottom: 14px;
-}
-
-.diagram-label {
+#chart .label {
   color: #fff;
   margin-bottom: 6px;
   font-size: 14px;
