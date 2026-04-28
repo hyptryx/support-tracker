@@ -1,161 +1,93 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #111;
-    color: #eee;
+/* ===========================
+   HRX GAMIFIED RANKING (Option B)
+   =========================== */
+
+/* Ranking Container */
+.ranking-container {
+  padding: 20px;
+  background: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 120, 0, 0.08);
 }
 
-header {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    background: #222;
-    border-bottom: 2px solid #ff8800;
+/* Ranking Title */
+.ranking-container h2 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #ff7a00;
+  text-shadow: 0 0 8px rgba(255, 120, 0, 0.4);
 }
 
-.logo {
-    font-size: 32px;
-    font-weight: bold;
-    color: #ff8800;
-    margin-right: 20px;
+/* Ranking List */
+.ranking-entry {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  background: #111;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 120, 0, 0.1);
+  transition: 0.25s ease;
 }
 
-.title h1 {
-    margin: 0;
-    font-size: 28px;
+.ranking-entry:hover {
+  transform: translateX(4px);
+  box-shadow: 0 0 16px rgba(255, 120, 0, 0.25);
 }
 
-.title p {
-    margin: 0;
-    opacity: 0.7;
+/* Rank Badge (#1, #2, #3) */
+.rank-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 14px;
+  color: #000;
+  text-shadow: 0 0 4px rgba(0,0,0,0.4);
 }
 
-nav {
-    display: flex;
-    background: #1a1a1a;
-    border-bottom: 2px solid #333;
+.rank-1 { background: linear-gradient(135deg, #ffd700, #ffb300); }
+.rank-2 { background: linear-gradient(135deg, #c0c0c0, #a8a8a8); }
+.rank-3 { background: linear-gradient(135deg, #cd7f32, #b06a2c); }
+.rank-default { background: #333; color: #fff; }
+
+/* Name + Supports */
+.ranking-info {
+  flex: 1;
 }
 
-.tab-button {
-    flex: 1;
-    padding: 15px;
-    background: #1a1a1a;
-    color: #ccc;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
+.ranking-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
 }
 
-.tab-button.active {
-    background: #ff8800;
-    color: #000;
-    font-weight: bold;
+.ranking-supports {
+  font-size: 14px;
+  color: #ff7a00;
+  opacity: 0.9;
 }
 
-main {
-    padding: 20px;
+/* Diagram Bars */
+.diagram-bar {
+  height: 22px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #ff7a00, #ff3c00);
+  box-shadow: 0 0 12px rgba(255, 120, 0, 0.4);
+  transition: width 0.6s ease;
 }
 
-.tab {
-    display: none;
+.diagram-row {
+  margin-bottom: 14px;
 }
 
-.tab.active {
-    display: block;
-}
-
-#config {
-    margin-bottom: 20px;
-}
-
-input {
-    padding: 8px;
-    border-radius: 4px;
-    border: none;
-    margin-right: 10px;
-}
-
-button {
-    padding: 8px 12px;
-    background: #ff8800;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    color: #000;
-    font-weight: bold;
-}
-
-button:hover {
-    background: #ff9900;
-}
-
-.table-wrapper {
-    overflow-x: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-th, td {
-    border: 1px solid #333;
-    padding: 8px;
-    text-align: center;
-}
-
-th {
-    background: #222;
-}
-
-td button {
-    margin-bottom: 5px;
-}
-
-#rankingList {
-    margin-top: 20px;
-}
-
-.ranking-item {
-    background: #222;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-left: 4px solid #ff8800;
-}
-
-.chart-bar {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.chart-label {
-    width: 120px;
-}
-
-.chart-track {
-    flex: 1;
-    background: #333;
-    height: 20px;
-    border-radius: 4px;
-    margin: 0 10px;
-    overflow: hidden;
-}
-
-.chart-fill {
-    height: 100%;
-    background: #ff8800;
-}
-
-.chart-value {
-    width: 40px;
-    text-align: right;
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    opacity: 0.5;
-    font-size: 14px;
+.diagram-label {
+  color: #fff;
+  margin-bottom: 6px;
+  font-size: 14px;
+  opacity: 0.85;
 }
