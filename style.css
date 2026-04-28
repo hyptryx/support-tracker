@@ -1,74 +1,161 @@
-.save-btn {
-    background: #ff8800;
-    color: white;
-    padding: 10px 20px;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: #eee;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: #222;
+    border-bottom: 2px solid #ff8800;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ff8800;
+    margin-right: 20px;
+}
+
+.title h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.title p {
+    margin: 0;
+    opacity: 0.7;
+}
+
+nav {
+    display: flex;
+    background: #1a1a1a;
+    border-bottom: 2px solid #333;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 15px;
+    background: #1a1a1a;
+    color: #ccc;
     border: none;
-    border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
-    margin: 20px 0;
 }
-.save-btn:hover {
+
+.tab-button.active {
+    background: #ff8800;
+    color: #000;
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+}
+
+.tab {
+    display: none;
+}
+
+.tab.active {
+    display: block;
+}
+
+#config {
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 8px;
+    border-radius: 4px;
+    border: none;
+    margin-right: 10px;
+}
+
+button {
+    padding: 8px 12px;
+    background: #ff8800;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #000;
+    font-weight: bold;
+}
+
+button:hover {
     background: #ff9900;
 }
 
-/* ===========================
-   HRX RANKING – UPGRADE STYLE
-   =========================== */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #333;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background: #222;
+}
+
+td button {
+    margin-bottom: 5px;
+}
 
 #rankingList {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .ranking-item {
-  background: #111;
-  padding: 14px 18px;
-  margin-bottom: 14px;
-  border-radius: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 0 12px rgba(255, 120, 0, 0.15);
-  transition: 0.25s ease;
+    background: #222;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-left: 4px solid #ff8800;
 }
 
-.ranking-item:hover {
-  transform: translateX(4px);
-  box-shadow: 0 0 18px rgba(255, 120, 0, 0.35);
+.chart-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-.ranking-name {
-  font-size: 20px;
-  font-weight: 700;
-  color: #ff7a00;
-  text-shadow: 0 0 6px rgba(255, 120, 0, 0.4);
+.chart-label {
+    width: 120px;
 }
 
-.ranking-score {
-  font-size: 16px;
-  font-weight: 600;
-  color: #fff;
-  opacity: 0.9;
+.chart-track {
+    flex: 1;
+    background: #333;
+    height: 20px;
+    border-radius: 4px;
+    margin: 0 10px;
+    overflow: hidden;
 }
 
-/* Diagramm */
-#chart {
-  margin-top: 20px;
+.chart-fill {
+    height: 100%;
+    background: #ff8800;
 }
 
-#chart .bar {
-  height: 22px;
-  background: linear-gradient(90deg, #ff7a00, #ff3c00);
-  border-radius: 10px;
-  margin-bottom: 10px;
-  box-shadow: 0 0 12px rgba(255, 120, 0, 0.4);
-  transition: width 0.6s ease;
+.chart-value {
+    width: 40px;
+    text-align: right;
 }
 
-#chart .label {
-  color: #fff;
-  margin-bottom: 6px;
-  font-size: 14px;
-  opacity: 0.85;
+footer {
+    text-align: center;
+    padding: 20px;
+    opacity: 0.5;
+    font-size: 14px;
 }
-
