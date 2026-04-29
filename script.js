@@ -170,3 +170,70 @@ function setupTabs() {
 
 setupTabs();
 loadFromGitHub();
+
+function downloadBackup() {
+    docRef.get().then(doc => {
+        if (!doc.exists) {
+            alert("Keine Daten gefunden.");
+            return;
+        }
+
+        const data = doc.data();
+        const json = JSON.stringify(data, null, 2);
+
+        const blob = new Blob([json], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "support-tracker-backup.json";
+        a.click();
+
+        URL.revokeObjectURL(url);
+    }).catch(err => {
+        console.error("Backup-Fehler:", err);
+        alert("Fehler beim Backup. Details in der Konsole.");
+    });
+}
+
+function downloadCSV() {
+    docRef.get().then(doc => {
+        if (!doc.exists) {
+            alert("Keine Daten gefunden.");
+            return;
+        }
+
+        const data = doc.data();
+        const streamers = data.streamers || [];
+        const support = data.support || {};
+
+        // Kopfzeile
+        let csv = "Supporter," + streamers.join(",") + "\n";
+
+        // Für jeden Supporter eine Zeile
+        streamers.forEach(supporter => {
+            const rowData = [];
+            const rowSupport = support[supporter] || {};
+
+            streamers.forEach(target => {
+                const value = rowSupport[target] != null ? rowSupport[target] : 0;
+                rowData.push(value);
+            });
+
+            csv += supporter + "," + rowData.join(",") + "\n";
+        });
+
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "support-tracker-export.csv";
+        a.click();
+
+        URL.revokeObjectURL(url);
+    }).catch(err => {
+        console.error("CSV-Export-Fehler:", err);
+        alert("Fehler beim CSV-Export. Details in der Konsole.");
+    });
+}
