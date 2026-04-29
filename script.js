@@ -237,3 +237,61 @@ function downloadCSV() {
         alert("Fehler beim CSV-Export. Details in der Konsole.");
     });
 }
+
+function importData() {
+    // 1) Automatisches Backup erstellen
+    docRef.get().then(doc => {
+        if (doc.exists) {
+            const data = JSON.stringify(doc.data(), null, 2);
+            const blob = new Blob([data], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "support-tracker-auto-backup.json";
+            a.click();
+
+            URL.revokeObjectURL(url);
+        }
+
+        // 2) Datei-Auswahl öffnen
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = "application/json";
+
+        input.onchange = () => {
+            const file = input.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = () => {
+                try {
+                    const imported = JSON.parse(reader.result);
+
+                    // 3) Sicherheitsabfrage
+                    const ok = confirm(
+                        "Willst du wirklich importieren?\n\n" +
+                        "Die aktuellen Firebase-Daten werden überschrieben.\n" +
+                        "Ein automatisches Backup wurde bereits gespeichert."
+                    );
+
+                    if (!ok) return;
+
+                    // 4) Import durchführen
+                    docRef.set(imported).then(() => {
+                        alert("Import erfolgreich! Seite lädt neu.");
+                        location.reload();
+                    });
+
+                } catch (err) {
+                    alert("Fehler: Datei ist keine gültige JSON.");
+                    console.error(err);
+                }
+            };
+
+            reader.readAsText(file);
+        };
+
+        input.click();
+    });
+}
