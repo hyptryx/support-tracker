@@ -254,44 +254,45 @@ function importData() {
             URL.revokeObjectURL(url);
         }
 
-        // 2) Datei-Auswahl öffnen
-        const input = document.createElement("input");
-        input.type = "file";
-        input.accept = "application/json";
+        // 2) KURZE Verzögerung, damit der Browser den Dialog zulässt
+        setTimeout(() => {
+            const input = document.createElement("input");
+            input.type = "file";
+            input.accept = "application/json";
 
-        input.onchange = () => {
-            const file = input.files[0];
-            if (!file) return;
+            input.onchange = () => {
+                const file = input.files[0];
+                if (!file) return;
 
-            const reader = new FileReader();
-            reader.onload = () => {
-                try {
-                    const imported = JSON.parse(reader.result);
+                const reader = new FileReader();
+                reader.onload = () => {
+                    try {
+                        const imported = JSON.parse(reader.result);
 
-                    // 3) Sicherheitsabfrage
-                    const ok = confirm(
-                        "Willst du wirklich importieren?\n\n" +
-                        "Die aktuellen Firebase-Daten werden überschrieben.\n" +
-                        "Ein automatisches Backup wurde bereits gespeichert."
-                    );
+                        const ok = confirm(
+                            "Willst du wirklich importieren?\n\n" +
+                            "Die aktuellen Firebase-Daten werden überschrieben.\n" +
+                            "Ein automatisches Backup wurde bereits gespeichert."
+                        );
 
-                    if (!ok) return;
+                        if (!ok) return;
 
-                    // 4) Import durchführen
-                    docRef.set(imported).then(() => {
-                        alert("Import erfolgreich! Seite lädt neu.");
-                        location.reload();
-                    });
+                        docRef.set(imported).then(() => {
+                            alert("Import erfolgreich! Seite lädt neu.");
+                            location.reload();
+                        });
 
-                } catch (err) {
-                    alert("Fehler: Datei ist keine gültige JSON.");
-                    console.error(err);
-                }
+                    } catch (err) {
+                        alert("Fehler: Datei ist keine gültige JSON.");
+                        console.error(err);
+                    }
+                };
+
+                reader.readAsText(file);
             };
 
-            reader.readAsText(file);
-        };
-
-        input.click();
+            input.click();
+        }, 300); // 300ms reichen völlig
     });
 }
+
