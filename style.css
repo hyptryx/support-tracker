@@ -14,10 +14,12 @@ header {
 }
 
 .logo {
-    font-size: 32px;
-    font-weight: bold;
-    color: #ff8800;
     margin-right: 20px;
+}
+.logo img {
+    height: 60px;   /* Größe anpassen */
+    width: 60px;    /* quadratisch */
+    object-fit: contain;
 }
 
 .title h1 {
