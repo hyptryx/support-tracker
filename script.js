@@ -12,11 +12,13 @@ async function loadFromGitHub() {
     if (!snap.exists) {
         streamers = [];
         support = {};
-        await docRef.set({ streamers, support });
+        notes = {};
+        await docRef.set({ streamers, support, notes });
     } else {
         const data = snap.data();
         streamers = data.streamers || [];
         support = data.support || {};
+        notes = data.notes || {};
     }
 
     ensureStructure();
@@ -25,13 +27,14 @@ async function loadFromGitHub() {
 
 async function saveToGitHub() {
     ensureStructure();
-    await docRef.set({ streamers, support }, { merge: true });
+    await docRef.set({ streamers, support, notes }, { merge: true });
     alert("Gespeichert! Alle HRX‑Leute sehen jetzt deinen Stand.");
 }
 
 function ensureStructure() {
     streamers.forEach(from => {
         support[from] = support[from] || {};
+        notes[from] = notes[from] || "";
         streamers.forEach(to => {
             if (from !== to) {
                 if (support[from][to] == null) support[from][to] = 0;
@@ -67,7 +70,7 @@ function renderTable() {
 
     let header = "<tr><th>Von \\ Zu</th>";
     streamers.forEach(s => header += `<th>${s}</th>`);
-    header += "</tr>";
+    header += "<th>Notiz</th></tr>";
     table.innerHTML += header;
 
     streamers.forEach(from => {
@@ -84,8 +87,17 @@ function renderTable() {
                     </td>`;
             }
         });
-        row += "</tr>";
-        table.innerHTML += row;
+        row += `
+    <td>
+        <textarea 
+            oninput="updateNote('${from}', this.value)"
+            placeholder="Notiz…"
+            style="width:120px; height:60px;"
+        >${notes[from] || ""}</textarea>
+    </td>
+</tr>`;
+table.innerHTML += row;
+
     });
 }
 
@@ -276,4 +288,8 @@ function importData() {
     };
 
     input.click();
+}
+
+function updateNote(name, text) {
+    notes[name] = text;
 }
