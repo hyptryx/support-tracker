@@ -191,24 +191,26 @@ footer {
     font-size: 28px;
     width: 60px;
     height: 60px;
-    border-radius: 50%;
+    border-radius: 8px; /* quadratisch mit leicht abgerundeten Ecken */
     background: #ff8800;
     color: #000;
     border: none;
     font-weight: bold;
     cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+
+    /* Abstand nach rechts */
+    margin-left: 25px;
 
     /* Glow-Effekt */
     box-shadow: 0 0 12px #ff8800, 0 0 24px #ff8800;
+
+    /* Animation */
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 #quickInput button:hover {
     background: #ff9900;
-    transform: scale(1.1);
+    transform: scale(1.08);
     box-shadow: 0 0 16px #ff9900, 0 0 32px #ff9900;
 }
 
