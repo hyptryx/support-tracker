@@ -116,7 +116,9 @@ function renderQuickInput() {
     fromSel.innerHTML = "";
     toSel.innerHTML = "";
 
-    streamers.forEach(name => {
+    const sorted = [...streamers].sort((a, b) => a.localeCompare(b));
+    
+    sorted.forEach(name => {
         const opt1 = document.createElement("option");
         opt1.value = name;
         opt1.textContent = name;
