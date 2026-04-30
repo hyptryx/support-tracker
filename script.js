@@ -68,10 +68,13 @@ function renderTable() {
         return;
     }
 
-    let header = "<tr><th>Von \\ Zu</th>";
+    // Kopfzeile mit THEAD
+    let header = "<thead><tr><th>Von \\ Zu</th>";
     streamers.forEach(s => header += `<th>${s}</th>`);
-    header += "<th>Notiz</th></tr>";
-    table.innerHTML += header;
+    header += "<th>Notiz</th></tr></thead>";
+
+    // Tabellenkörper sammeln
+    let body = "<tbody>";
 
     streamers.forEach(from => {
         let row = `<tr><th>${from}</th>`;
@@ -87,18 +90,23 @@ function renderTable() {
                     </td>`;
             }
         });
-        row += `
-    <td>
-        <textarea 
-            oninput="updateNote('${from}', this.value)"
-            placeholder="Notiz…"
-            style="width:120px; height:60px;"
-        >${notes[from] || ""}</textarea>
-    </td>
-</tr>`;
-table.innerHTML += row;
 
+        row += `
+            <td>
+                <textarea 
+                    oninput="updateNote('${from}', this.value)"
+                    placeholder="Notiz…"
+                    style="width:120px; height:60px;"
+                >${notes[from] || ""}</textarea>
+            </td>
+        </tr>`;
+
+        body += row;
     });
+
+    body += "</tbody>";
+
+    table.innerHTML = header + body;
 }
 
 function getTotals() {
