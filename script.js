@@ -109,6 +109,26 @@ function renderTable() {
     table.innerHTML = header + body;
 }
 
+function renderQuickInput() {
+    const fromSel = document.getElementById("fromSelect");
+    const toSel = document.getElementById("toSelect");
+
+    fromSel.innerHTML = "";
+    toSel.innerHTML = "";
+
+    streamers.forEach(name => {
+        const opt1 = document.createElement("option");
+        opt1.value = name;
+        opt1.textContent = name;
+        fromSel.appendChild(opt1);
+
+        const opt2 = document.createElement("option");
+        opt2.value = name;
+        opt2.textContent = name;
+        toSel.appendChild(opt2);
+    });
+}
+
 function getTotals() {
     const totals = {};
     streamers.forEach(s => totals[s] = 0);
@@ -172,6 +192,7 @@ function renderRanking() {
 function renderAll() {
     renderTable();
     renderRanking();
+    renderQuickInput();
 }
 
 function setupTabs() {
@@ -300,4 +321,17 @@ function importData() {
 
 function updateNote(name, text) {
     notes[name] = text;
+}
+
+function quickAdd() {
+    const from = document.getElementById("fromSelect").value;
+    const to = document.getElementById("toSelect").value;
+
+    if (from === to) {
+        alert("Ein Streamer kann nicht sich selbst supporten.");
+        return;
+    }
+
+    support[from][to]++;
+    renderAll();
 }
