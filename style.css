@@ -93,6 +93,8 @@ button:hover {
 
 .table-wrapper {
     overflow-x: auto;
+    overflow-y: auto;
+    max-height: 600px; /* oder was für dich passt */
 }
 
 table {
@@ -162,10 +164,11 @@ footer {
     font-size: 14px;
 }
 
-#supportTable th {
+#supportTable thead th {
     position: sticky;
     top: 0;
-    background: #222; /* oder deine Wunschfarbe */
+    background: #222;
     color: white;
     z-index: 10;
 }
+
