@@ -161,3 +161,11 @@ footer {
     opacity: 0.5;
     font-size: 14px;
 }
+
+#supportTable th {
+    position: sticky;
+    top: 0;
+    background: #222; /* oder deine Wunschfarbe */
+    color: white;
+    z-index: 10;
+}
