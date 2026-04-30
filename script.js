@@ -4,6 +4,7 @@ const docRef = db.collection("tracker").doc("data");
 
 let streamers = [];
 let support = {};
+let notes = {};
 
 async function loadFromGitHub() {
     const snap = await docRef.get();
