@@ -192,6 +192,8 @@ function renderRanking() {
 }
 
 function renderAll() {
+    streamers.sort((a, b) => a.localeCompare(b));
+
     renderTable();
     renderRanking();
     renderQuickInput();
