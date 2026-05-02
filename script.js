@@ -156,6 +156,30 @@ function renderRanking(limit = 9999) {
     const totals = getTotals();
     const sorted = Object.entries(totals).sort((a, b) => b[1] - a[1]);
 
+    // Filter: nur Streamer mit 0 Supports
+if (limit === "zero") {
+    const zeroList = sorted.filter(([name, score]) => score === 0);
+
+    // Top3 leeren
+    top3Container.innerHTML = "";
+
+    // Restliches Ranking nur mit 0ern
+    zeroList.forEach(([name, score], index) => {
+        const div = document.createElement("div");
+        div.className = "ranking-item";
+        div.innerHTML = `
+            <div class="ranking-name">${name}</div>
+            <div class="ranking-score">0 Supports</div>
+        `;
+        listContainer.appendChild(div);
+    });
+
+    // Chart leeren
+    chart.innerHTML = "";
+
+    return; // fertig
+}
+
     // --- TOP 3 HERO SECTION ---
     const top3 = sorted.slice(0, 3);
     top3.forEach(([name, score], index) => {
@@ -239,14 +263,22 @@ function setupRankingFilters() {
     if (!buttons.length) return;
 
     buttons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            buttons.forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
+    btn.addEventListener("click", () => {
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
 
-            const limit = parseInt(btn.dataset.limit, 10);
-            renderRanking(limit);
-        });
+        // 0-Support-Filter
+        if (btn.dataset.zero === "true") {
+            renderRanking("zero");
+            return;
+        }
+
+        // normale Top X Filter
+        const limit = parseInt(btn.dataset.limit, 10);
+        renderRanking(limit);
     });
+});
+
 }
 
 setupTabs();
