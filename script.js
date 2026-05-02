@@ -144,25 +144,44 @@ function getTotals() {
     return totals;
 }
 
-function renderRanking() {
-    const container = document.getElementById("rankingList");
+function renderRanking(limit = 9999) {
+    const listContainer = document.getElementById("rankingList");
+    const top3Container = document.getElementById("top3");
     const chart = document.getElementById("chart");
-    container.innerHTML = "";
+
+    listContainer.innerHTML = "";
+    top3Container.innerHTML = "";
     chart.innerHTML = "";
 
     const totals = getTotals();
     const sorted = Object.entries(totals).sort((a, b) => b[1] - a[1]);
 
-    sorted.forEach(([name, score], index) => {
+    // --- TOP 3 HERO SECTION ---
+    const top3 = sorted.slice(0, 3);
+    top3.forEach(([name, score], index) => {
+        const div = document.createElement("div");
+        div.className = "top3-item rank-" + (index + 1);
+        div.innerHTML = `
+            <div class="top3-rank">#${index + 1}</div>
+            <div class="top3-name">${name}</div>
+            <div class="top3-score">${score} Supports</div>
+        `;
+        top3Container.appendChild(div);
+    });
+
+    // --- RESTLICHES RANKING ---
+    const rest = sorted.slice(3, 3 + limit);
+    rest.forEach(([name, score], index) => {
         const div = document.createElement("div");
         div.className = "ranking-item";
         div.innerHTML = `
-            <div class="ranking-name">#${index + 1} ${name}</div>
+            <div class="ranking-name">#${index + 4} ${name}</div>
             <div class="ranking-score">${score} Supports</div>
         `;
-        container.appendChild(div);
+        listContainer.appendChild(div);
     });
 
+    // --- CHART (wie bisher) ---
     const max = Math.max(...sorted.map(([_, v]) => v), 1);
     sorted.forEach(([name, score]) => {
         const bar = document.createElement("div");
@@ -214,7 +233,24 @@ function setupTabs() {
     });
 }
 
+function setupRankingFilters() {
+    const buttons = document.querySelectorAll("#rankingFilters button");
+
+    if (!buttons.length) return;
+
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            buttons.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            const limit = parseInt(btn.dataset.limit, 10);
+            renderRanking(limit);
+        });
+    });
+}
+
 setupTabs();
+setupRankingFilters();
 loadFromGitHub();
 
 function downloadBackup() {
