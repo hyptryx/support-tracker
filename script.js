@@ -234,12 +234,62 @@ if (limit === "zero") {
     });
 }
 
+function getLurksReceived(name) {
+    let total = 0;
+    streamers.forEach(from => {
+        if (support[from] && support[from][name]) {
+            total += support[from][name];
+        }
+    });
+    return total;
+}
+
+function getLurksGiven(name) {
+    let total = 0;
+    if (support[name]) {
+        streamers.forEach(to => {
+            if (support[name][to]) {
+                total += support[name][to];
+            }
+        });
+    }
+    return total;
+}
+
+function populateInfoSelect() {
+    const select = document.getElementById("infoSelect");
+    if (!select) return;
+
+    select.innerHTML = "";
+
+    streamers.forEach(name => {
+        const opt = document.createElement("option");
+        opt.value = name;
+        opt.textContent = name;
+        select.appendChild(opt);
+    });
+}
+
+function updateInfoBox() {
+    const select = document.getElementById("infoSelect");
+    const result = document.getElementById("infoResult");
+    if (!select || !result || streamers.length === 0) return;
+
+    const name = select.value;
+    const received = getLurksReceived(name);
+    const given = getLurksGiven(name);
+
+    result.textContent = `${name} hat ${received} Lurks erhalten und ${given} Lurks gegeben`;
+}
+
 function renderAll() {
     streamers.sort((a, b) => a.localeCompare(b));
 
     renderTable();
     renderRanking();
     renderQuickInput();
+    populateInfoSelect();
+    updateInfoBox();
 }
 
 function setupTabs() {
@@ -284,6 +334,13 @@ function setupRankingFilters() {
 setupTabs();
 setupRankingFilters();
 loadFromGitHub();
+
+document.addEventListener("DOMContentLoaded", () => {
+    const infoSelect = document.getElementById("infoSelect");
+    if (infoSelect) {
+        infoSelect.addEventListener("change", updateInfoBox);
+    }
+});
 
 function downloadBackup() {
     docRef.get().then(doc => {
