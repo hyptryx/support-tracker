@@ -122,10 +122,6 @@ th {
     font-weight: bold;
 }
 
-td button {
-    margin-bottom: 5px;
-}
-
 /* Sticky Header */
 #supportTable thead th {
     position: sticky;
@@ -220,14 +216,6 @@ td button {
 .chart-value {
     width: 40px;
     text-align: right;
-}
-
-/* --- FOOTER --- */
-footer {
-    text-align: center;
-    padding: 20px;
-    opacity: 0.5;
-    font-size: 14px;
 }
 
 /* --- TOP 3 HERO SECTION --- */
