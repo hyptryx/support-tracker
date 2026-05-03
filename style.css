@@ -173,6 +173,25 @@ th {
     box-shadow: 0 0 16px #b57cff, 0 0 32px #8a2be2;
 }
 
+/* Labels über den Quick‑Input Feldern */
+.quick-labels {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #5a1e99;
+    font-size: 14px;
+    padding-left: 4px;
+}
+
+/* Zeile mit Selects + Button */
+.quick-input-row {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr 60px;
+    align-items: center;
+    gap: 10px;
+}
+
 /* --- RANKING LIST --- */
 #rankingList {
     margin-top: 20px;
