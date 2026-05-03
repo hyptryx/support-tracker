@@ -176,18 +176,18 @@ th {
 /* Labels über den Quick‑Input Feldern */
 .quick-labels {
     display: grid;
-    grid-template-columns: 1fr 40px 1fr;
+    grid-template-columns: auto 40px auto 60px;
     margin-bottom: 6px;
     font-weight: bold;
     color: #5a1e99;
     font-size: 14px;
-    padding-left: 4px;
+    align-items: center;
 }
 
 /* Zeile mit Selects + Button */
 .quick-input-row {
     display: grid;
-    grid-template-columns: 1fr 40px 1fr 60px;
+    grid-template-columns: auto 40px auto 60px;
     align-items: center;
     gap: 10px;
 }
