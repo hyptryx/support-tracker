@@ -1,24 +1,26 @@
+/* --- GLOBAL --- */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #111;
-    color: #eee;
+    background: #ffffff;
+    color: #222;
 }
 
+/* --- HEADER --- */
 header {
     display: flex;
     align-items: center;
     padding: 20px;
-    background: #222;
-    border-bottom: 2px solid #ff8800;
+    background: #ffffff;
+    border-bottom: 3px solid #8a2be2;
 }
 
 .logo {
     margin-right: 20px;
 }
 .logo img {
-    height: 60px;   /* Größe anpassen */
-    width: 60px;    /* quadratisch */
+    height: 60px;
+    width: 60px;
     object-fit: contain;
 }
 
@@ -32,28 +34,30 @@ header {
     opacity: 0.7;
 }
 
+/* --- NAVIGATION --- */
 nav {
     display: flex;
-    background: #1a1a1a;
-    border-bottom: 2px solid #333;
+    background: #f5f0ff;
+    border-bottom: 2px solid #8a2be2;
 }
 
 .tab-button {
     flex: 1;
     padding: 15px;
-    background: #1a1a1a;
-    color: #ccc;
+    background: #f5f0ff;
+    color: #5a1e99;
     border: none;
     cursor: pointer;
     font-size: 16px;
-}
-
-.tab-button.active {
-    background: #ff8800;
-    color: #000;
     font-weight: bold;
 }
 
+.tab-button.active {
+    background: #8a2be2;
+    color: #fff;
+}
+
+/* --- MAIN --- */
 main {
     padding: 20px;
 }
@@ -70,31 +74,33 @@ main {
     margin-bottom: 20px;
 }
 
+/* --- INPUTS & BUTTONS --- */
 input {
     padding: 8px;
     border-radius: 4px;
-    border: none;
+    border: 1px solid #ccc;
     margin-right: 10px;
 }
 
 button {
     padding: 8px 12px;
-    background: #ff8800;
+    background: #8a2be2;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    color: #000;
+    color: #fff;
     font-weight: bold;
 }
 
 button:hover {
-    background: #ff9900;
+    background: #b57cff;
 }
 
+/* --- TABLE --- */
 .table-wrapper {
     overflow-x: auto;
     overflow-y: auto;
-    max-height: 600px; /* oder was für dich passt */
+    max-height: 600px;
 }
 
 table {
@@ -104,30 +110,88 @@ table {
 }
 
 th, td {
-    border: 1px solid #333;
+    border: 1px solid #ccc;
     padding: 8px;
     text-align: center;
+    color: #222;
 }
 
 th {
-    background: #222;
+    background: #f5f0ff;
+    color: #5a1e99;
+    font-weight: bold;
 }
 
 td button {
     margin-bottom: 5px;
 }
 
+/* Sticky Header */
+#supportTable thead th {
+    position: sticky;
+    top: 0;
+    background: #8a2be2;
+    color: #fff;
+    z-index: 10;
+}
+
+/* Sticky Left Column */
+#supportTable tbody th {
+    position: sticky;
+    left: 0;
+    background: #f5f0ff;
+    color: #5a1e99;
+    z-index: 9;
+    border-right: 2px solid #ccc;
+}
+
+/* --- QUICK INPUT --- */
+#quickInput select {
+    font-size: 20px;
+    padding: 12px 16px;
+    min-width: 220px;
+    height: 50px;
+}
+
+#quickInput button {
+    font-size: 24px;
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    background: #8a2be2;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 25px;
+
+    /* Lila Glow */
+    box-shadow: 0 0 12px #b57cff, 0 0 24px #8a2be2;
+
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+#quickInput button:hover {
+    background: #b57cff;
+    transform: scale(1.08);
+    box-shadow: 0 0 16px #b57cff, 0 0 32px #8a2be2;
+}
+
+/* --- RANKING LIST --- */
 #rankingList {
     margin-top: 20px;
 }
 
 .ranking-item {
-    background: #222;
+    background: #ffffff;
     padding: 10px;
     margin-bottom: 10px;
-    border-left: 4px solid #ff8800;
+    border-left: 4px solid #8a2be2;
+    box-shadow: 0 0 8px rgba(138, 43, 226, 0.2);
+    animation: fadeUp 0.3s ease-out forwards;
 }
 
+/* --- CHART --- */
 .chart-bar {
     display: flex;
     align-items: center;
@@ -140,7 +204,7 @@ td button {
 
 .chart-track {
     flex: 1;
-    background: #333;
+    background: #eee;
     height: 20px;
     border-radius: 4px;
     margin: 0 10px;
@@ -149,7 +213,8 @@ td button {
 
 .chart-fill {
     height: 100%;
-    background: #ff8800;
+    background: #8a2be2;
+    box-shadow: 0 0 10px #b57cff;
 }
 
 .chart-value {
@@ -157,61 +222,12 @@ td button {
     text-align: right;
 }
 
+/* --- FOOTER --- */
 footer {
     text-align: center;
     padding: 20px;
     opacity: 0.5;
     font-size: 14px;
-}
-
-#supportTable thead th {
-    position: sticky;
-    top: 0;
-    background: #222;
-    color: white;
-    z-index: 10;
-}
-
-#supportTable tbody th {
-    position: sticky;
-    left: 0;
-    background: #222;
-    z-index: 9;
-    border-right: 2px solid #444; /* ← Punkt 4 */
-}
-
-#quickInput select {
-    font-size: 20px;
-    padding: 12px 16px;
-    min-width: 220px;
-    height: 50px;
-}
-
-#quickInput button {
-    font-size: 24px;
-    width: 50px;
-    height: 50px;
-    border-radius: 8px; /* quadratisch mit leicht abgerundeten Ecken */
-    background: #ff8800;
-    color: #000;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-
-    /* Abstand nach rechts */
-    margin-left: 25px;
-
-    /* Glow-Effekt */
-    box-shadow: 0 0 12px #ff8800, 0 0 24px #ff8800;
-
-    /* Animation */
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-#quickInput button:hover {
-    background: #ff9900;
-    transform: scale(1.08);
-    box-shadow: 0 0 16px #ff9900, 0 0 32px #ff9900;
 }
 
 /* --- TOP 3 HERO SECTION --- */
@@ -224,18 +240,43 @@ footer {
 
 .top3-item {
     flex: 1;
-    background: #222;
+    background: #ffffff;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    border: 3px solid #ff8800;
-    box-shadow: 0 0 15px #ff8800;
+    border: 3px solid #8a2be2;
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+    animation: fadeUp 0.4s ease-out forwards;
+}
+
+/* Medaillen */
+.top3-medal {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+/* Platz 1 Gradient */
+.top3-item.rank-1 {
+    background: linear-gradient(135deg, #8a2be2, #b57cff);
+    box-shadow: 0 0 20px #8a2be2, 0 0 35px #b57cff;
+}
+
+/* Platz 2 */
+.top3-item.rank-2 {
+    border-color: #cccccc;
+    box-shadow: 0 0 15px #aaaaaa;
+}
+
+/* Platz 3 */
+.top3-item.rank-3 {
+    border-color: #cd7f32;
+    box-shadow: 0 0 15px #cd7f32;
 }
 
 .top3-item .top3-rank {
     font-size: 32px;
     font-weight: bold;
-    color: #ff8800;
+    color: #5a1e99;
 }
 
 .top3-item .top3-name {
@@ -257,15 +298,27 @@ footer {
 #rankingFilters button {
     padding: 8px 16px;
     margin-right: 10px;
-    background: #333;
-    color: #eee;
+    background: #f5f0ff;
+    color: #5a1e99;
     border-radius: 6px;
-    border: 1px solid #555;
+    border: 1px solid #8a2be2;
     cursor: pointer;
 }
 
 #rankingFilters button.active {
-    background: #ff8800;
-    color: #000;
+    background: #8a2be2;
+    color: #fff;
     font-weight: bold;
+}
+
+/* --- ANIMATION --- */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
