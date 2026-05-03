@@ -243,22 +243,25 @@ th {
     margin-bottom: 8px;
 }
 
-/* Platz 1 Gradient */
+/* Platz 1 – GOLD */
 .top3-item.rank-1 {
-    background: linear-gradient(135deg, #8a2be2, #b57cff);
-    box-shadow: 0 0 20px #8a2be2, 0 0 35px #b57cff;
+    background: #fff8d1; /* leichtes Gold */
+    border-color: #ffd700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
 }
 
-/* Platz 2 */
+/* Platz 2 – SILBER */
 .top3-item.rank-2 {
-    border-color: #cccccc;
-    box-shadow: 0 0 15px #aaaaaa;
+    background: #f7f7f7;
+    border-color: #c0c0c0;
+    box-shadow: 0 0 15px rgba(192, 192, 192, 0.6);
 }
 
-/* Platz 3 */
+/* Platz 3 – BRONZE */
 .top3-item.rank-3 {
+    background: #fff4e6;
     border-color: #cd7f32;
-    box-shadow: 0 0 15px #cd7f32;
+    box-shadow: 0 0 15px rgba(205, 127, 50, 0.6);
 }
 
 .top3-item .top3-rank {
