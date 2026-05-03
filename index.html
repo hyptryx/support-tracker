@@ -57,12 +57,21 @@
         </div>
 
         <div id="quickInput" style="margin: 20px 0;">
-            <h2>Schnell‑Support</h2>
-            <select id="fromSelect"></select>
-            <span style="margin: 0 10px;">→</span>
-            <select id="toSelect"></select>
-            <button onclick="quickAdd()">+</button>
-        </div>
+    <h2>Schnell‑Support</h2>
+
+    <div class="quick-labels">
+        <div>Supporter (der lurkt)</div>
+        <div></div>
+        <div>Empfänger (bei dem gelurkt wird)</div>
+    </div>
+
+    <div class="quick-input-row">
+        <select id="fromSelect"></select>
+        <span style="margin: 0 10px;">→</span>
+        <select id="toSelect"></select>
+        <button onclick="quickAdd()">+</button>
+    </div>
+</div>
         
         <h2>Support Matrix</h2>
         <div class="table-wrapper">
